@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
-    @ObservedObject var store = RoomStore()
+    @ObservedObject var store = RoomStore(rooms: roomData)
     
     var body: some View {
         NavigationView {
@@ -27,9 +27,11 @@ struct ContentView: View {
                 }
             }
             .navigationBarTitle(Text("Hotel Rooms"))
-        .navigationBarItems(trailing: EditButton())
+            .navigationBarItems(trailing: EditButton())
             .listStyle(GroupedListStyle())
         }
+        .environment(\.sizeCategory, .extraExtraLarge)
+        .environment(\.colorScheme, .dark)
     }
     
     func addRoom() {
@@ -46,17 +48,17 @@ struct ContentView: View {
     }
 }
 
+#if DEBUG
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-
-            ContentView(store: RoomStore(rooms: testData))
+            ContentView(store: RoomStore(rooms: roomData))
                 .environment(\.sizeCategory, .extraExtraLarge)
                 .environment(\.colorScheme, .dark)
-
         }
     }
 }
+#endif
 
 struct RoomCell: View {
     let room: Room

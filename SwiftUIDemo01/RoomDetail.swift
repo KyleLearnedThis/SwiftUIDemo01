@@ -30,11 +30,13 @@ struct RoomDetail: View {
     }
 }
 
+#if DEBUG
 struct RoomDetail_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-             NavigationView { RoomDetail(room: testData[0]) }
-             NavigationView { RoomDetail(room: testData[1]) }
+             NavigationView { RoomDetail(room: roomData[0]) }
+             NavigationView { RoomDetail(room: roomData[1]) }
         }
     }
 }
+#endif
